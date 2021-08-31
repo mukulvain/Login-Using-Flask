@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename = 'styles.css') }}"
+    />
+    <title>Register</title>
+  </head>
+  <body>
+    <section>
+      <div class="container-fluid text-light my-5">
+        <div class="row justify-content-center">
+          <div
+            class="
+              col-12 col-sm-8 col-md-6 col-lg-8 col-xl-6
+              bg-dark
+              register-box
+            "
+          >
+            <div class="row justify-content-center">
+              <h1 class="text-center mt-4 mb-3">IIT Indore</h1>
+              <h3 class="text-center mb-5">B. Tech Courses</h3>
+              <h3 class="text-center mb-3 fw-bold">Register</h3>
+            </div>
+
+            <form class="form-floating" method="post">
+              <div class="row justify-content-evenly">
+                <div class="px-4 col-lg-6 col-xl-6 mt-4">
+                  <label for="fname" class="mb-1">First Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="fname"
+                    name="fname"
+                    {% if registererror %}
+                    value = {{first_name}}
+                    {% endif %}
+                    placeholder="First Name"
+                    required
+                  />
+                  <label for="fname" id="fname-error"
+                    >Name must not contain numbers</label
+                  >
+                </div>
+                <div class="px-4 col-lg-6 col-xl-6 mt-4">
+                  <label for="lname" class="mb-1">Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="lname"
+                    name="lname"          
+                    {% if registererror %}
+                    value = {{last_name}}
+                    {% endif %}
+                    placeholder="Last Name"
+                    required
+                  />
+                  <label for="lname" id="lname-error"
+                    >Name must not contain numbers</label
+                  >
+                </div>
+              </div>
+              <div class="row justify-content-evenly">
+                <div class="px-4 col-lg-6 col-xl-6 mt-4">
+                  <label for="usermail" class="mb-1">Email</label>
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      class="form-control {{registererror}}"
+                      id="usermail"
+                      name="usermail"
+                      aria-label="Recipient's User ID"
+                      aria-describedby="addon"
+                      required
+                    />
+                    <span class="input-group-text" id="addon">@iiti.ac.in</span>
+                  </div>
+                  {% if registererror %}
+                  <div>
+                    <label for="password" id="password-error"
+                      >User ID already exists</label
+                    >
+                  </div>
+                  {% endif %}
+                </div>
+                <div class="px-4 col-lg-6 col-xl-6 mt-4">
+                  <label for="mobile" class="mb-1">Mobile No.</label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="mobile"
+                    {% if registererror %}
+                    value = {{mobile}}
+                    {% endif %}
+                    name="mobile"
+                    placeholder=""
+                    required
+                    pattern="[0-9]{10}"
+                  />
+                  <label for="mobile" id="mobile-error">10 digits</label>
+                </div>
+              </div>
+              <div class="row justify-content-evenly">
+                <div class="px-4 col-lg-6 col-xl-6 mt-4">
+                  <label for="password" class="mb-1">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    name="password"
+                    {% if registererror %}
+                    value = {{password}}
+                    {% endif %}
+                    aria-label="Recipient's Password"
+                    required
+                  />
+                </div>
+                <div class="px-4 col-lg-6 col-xl-6 mt-4">
+                  <label for="cpassword" class="mb-1">Confirm Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="cpassword"
+                    name="cpassword"
+                    {% if registererror %}
+                    value = {{cpassword}}
+                    {% endif %}
+                    aria-label="Confirm Password"
+                    required
+                  />
+                  <label for="cpassword" id="confirm-error"
+                    >Passwords not Matching</label
+                  >
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="m-4 px-4 d-flex justify-content-end">
+                  <button class="btn btn-primary" type="submit" id="submit">
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <div class="d-flex justify-content-center m-4">
+              <span class="px-1">Already have an account?</span>
+              <a href="/login">Login</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+      crossorigin="anonymous"
+    ></script>
+    <script src="{{ url_for('static', filename = 'register.js') }}"></script>
+  </body>
+</html>

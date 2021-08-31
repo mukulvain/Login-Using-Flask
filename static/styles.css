@@ -1,0 +1,41 @@
+html, body, section{
+    height: 100%;
+    width: 100%;
+}
+
+.container-fluid{
+    height: 85vh;
+    border-radius: 10px;
+}
+#uermail-error{
+    color:red;
+}
+#password-error{
+    color:red;
+}
+.register-box{
+    border-radius: 10px;
+}
+
+.course-box{
+    border-radius: 10px;
+}
+#fname-error{
+    color:red;
+    display:none;
+}
+#lname-error{
+    color:red;
+    display:none;
+}
+#confirm-error{
+    color:red;
+    display:none;
+}
+
+.list-group-flush{
+    border-radius: 10px
+}
+img{
+    width: 25% !important;
+}
