@@ -1,13 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
-import random, hashlib
+import random, hashlib, os
+from dotenv import load_dotenv
+load_dotenv()
 
 
 app = Flask(__name__)
-app.config["SECRET_KEY"]=hashlib.sha256("dbms".encode()).hexdigest()
+app.config["SECRET_KEY"]=os.getenv("SECRET_KEY")
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@localhost/mydb'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("MYSQL_LINK")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -54,12 +56,12 @@ class Courses(db.Model):
       self.course_id = course_id
       self.course = course
 
-db.create_all()
+# db.create_all()
 
 
-for key in courses:
-   db.session.add(Courses(key, courses[key]))
-db.session.commit()
+# for key in courses:
+#    db.session.add(Courses(key, courses[key]))
+# db.session.commit()
 
 
 @app.route('/register/', methods=["POST", "GET"])
@@ -76,7 +78,7 @@ def register_page():
 
       storedUserId = Student.query.filter_by(userid = usermail).first()
       if storedUserId:
-         return render_template("register.html", registererror = "is-invalid", first_name = first_name, last_name = last_name, mobile = mobile, password = password, cpassword = password)
+         return render_template("register.html", registererror = "is-invalid", first_name = first_name, last_name = last_name, mobile = mobile, password = password, cpassword = cpassword)
       else:
          db.session.add(Student(usermail, first_name, last_name, mobile, encryptedPassword, course_list ))
          db.session.commit()
